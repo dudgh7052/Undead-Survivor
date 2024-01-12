@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     /// <summary>
-    /// ??????
+    /// 데미지
     /// </summary>
     public float m_damage = 0.0f;
 
     /// <summary>
-    /// ???? ??
+    /// 관통 수
     /// </summary>
     public int m_per = 0;
 
@@ -22,11 +22,11 @@ public class Bullet : MonoBehaviour
     }
 
     /// <summary>
-    /// ????
+    /// 초기화
     /// </summary>
-    /// <param name="argDamage">??????</param>
-    /// <param name="argPer">???? ??</param>
-    /// /// <param name="argDir">????</param>
+    /// <param name="argDamage">데미지</param>
+    /// <param name="argPer">관통 수</param>
+    /// /// <param name="argDir">방향</param>
     public void Init(float argDamage, int argPer, Vector3 argDir)
     {
         this.m_damage = argDamage;
