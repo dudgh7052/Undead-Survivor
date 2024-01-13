@@ -13,14 +13,21 @@ public class Player : MonoBehaviour
     Rigidbody2D m_rigid = null; // 리지드바디
     SpriteRenderer m_charSprite = null; // 캐릭터 스프라이트렌더러
     Animator m_animator = null; // 애니메이터
+    public RuntimeAnimatorController[] m_animController = null;
 
-    void Start()
+    void Awake()
     {
         m_rigid = GetComponent<Rigidbody2D>();
         m_charSprite = GetComponent<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
         m_scanner = GetComponent<Scanner>();
         m_hands = GetComponentsInChildren<Hand>(true); // 컴포넌트를 가져올때 비활성화 되있을경우 ()괄호 안에 true를 넣으면 가져옴
+    }
+
+    void OnEnable()
+    {
+        m_moveSpeed *= Character.Speed;
+        m_animator.runtimeAnimatorController = m_animController[GameManager.Instance.m_playerId];
     }
 
     void FixedUpdate()

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public float m_maxGameTime = 2 * 10.0f;
 
     [Header("# Player Info")]
+    public int m_playerId = 0;
     public float m_health = 0;
     public float m_maxHealth = 0;
 
@@ -104,11 +105,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 게임 시작
     /// </summary>
-    public void GameStart()
+    public void GameStart(int argId)
     {
+        m_playerId = argId;
         m_health = m_maxHealth;
-        m_uiLevelUp.Select(0); // 임시 스크립트 (첫번째 캐릭터 선택)
-        m_isLive = true;
+
+        m_player.gameObject.SetActive(true);
+        m_uiLevelUp.Select(m_playerId % 2);
+
         Resume();
     }
 
