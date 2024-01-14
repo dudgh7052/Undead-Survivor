@@ -26,6 +26,10 @@ public class LevelUp : MonoBehaviour
         GameManager.Instance.Resume();
     }
 
+    /// <summary>
+    /// 아이템 버튼 클릭
+    /// </summary>
+    /// <param name="argIndex">버튼 인덱스</param>
     public void Select(int argIndex)
     {
         m_items[argIndex].OnClick();

@@ -94,8 +94,19 @@ public class Item : MonoBehaviour
                 break;
         }
 
+        // 버튼이 Damage의 길이와 같을 경우 버튼 비활성화
         if (m_level == m_data.m_damages.Length)
         {
+            switch (m_data.m_itemType)        
+            {
+                case ItemData.ItemType.Melee:
+                    AchieveManager.Instance.ClearAchieve(AchieveManager.Instance.Achieves[2]);
+                    break;
+                case ItemData.ItemType.Range:
+                    AchieveManager.Instance.ClearAchieve(AchieveManager.Instance.Achieves[3]);
+                    break;
+            }
+
             GetComponent<Button>().interactable = false;
         }
     }
