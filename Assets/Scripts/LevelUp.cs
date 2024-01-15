@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelUp : MonoBehaviour
@@ -13,17 +11,27 @@ public class LevelUp : MonoBehaviour
         m_items = GetComponentsInChildren<Item>(true);
     }
 
+    /// <summary>
+    /// 레벨업 아이템 선택창 켜기
+    /// </summary>
     public void Show()
     {
         Next();
         m_rect.localScale = Vector3.one;
         GameManager.Instance.Stop();
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.Instance.EffectBgm(true);
     }
 
+    /// <summary>
+    /// 레벨업 아이템 선택창 끄기
+    /// </summary>
     public void Hide()
     {
         m_rect.localScale = Vector3.zero;
         GameManager.Instance.Resume();
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.Instance.EffectBgm(false);
     }
 
     /// <summary>

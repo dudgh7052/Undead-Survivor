@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -166,5 +163,7 @@ public class Weapon : MonoBehaviour
         // Quaternion.FromToRotation()을 통해 방향으로 Rotation 돌려주기
         _bullet.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
         _bullet.GetComponent<Bullet>().Init(m_damage, m_count, _dir);
+
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Range);
     }
 }

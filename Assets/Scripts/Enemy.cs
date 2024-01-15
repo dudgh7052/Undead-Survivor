@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -141,6 +140,7 @@ public class Enemy : MonoBehaviour
         {
             // Hit Effect
             m_animator.SetTrigger("Hit");
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
         }
         else
         {
@@ -152,6 +152,10 @@ public class Enemy : MonoBehaviour
             m_animator.SetBool("Dead", true); // 애니메이터 bool 속성 true로 바꾸기
             GameManager.Instance.m_kill++;
             GameManager.Instance.GetExp();
+
+            if (!GameManager.Instance.m_isLive) return;
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Dead);
         }
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class AchieveManager : MonoBehaviour
@@ -155,6 +153,7 @@ public class AchieveManager : MonoBehaviour
     IEnumerator NoticeRoutine()
     {
         m_uiNotice.SetActive(true);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.LevelUp);
 
         yield return m_waitSecond;
 

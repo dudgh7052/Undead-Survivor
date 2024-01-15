@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -114,6 +113,9 @@ public class GameManager : MonoBehaviour
         m_uiLevelUp.Select(m_playerId % 2);
 
         Resume();
+
+        AudioManager.Instance.PlayBgm(true);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     /// <summary>
@@ -132,10 +134,15 @@ public class GameManager : MonoBehaviour
 
         m_uiResult.gameObject.SetActive(true);
         m_uiResult.Lose();
-
         Stop();
+
+        AudioManager.Instance.PlayBgm(false);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
+    /// <summary>
+    /// °ÔÀÓ ½Â¸®
+    /// </summary>
     public void GameVictory()
     {
         StartCoroutine(GameVictoryCoroutine());
@@ -150,8 +157,10 @@ public class GameManager : MonoBehaviour
 
         m_uiResult.gameObject.SetActive(true);
         m_uiResult.Win();
-
         Stop();
+
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Win);
+        AudioManager.Instance.PlayBgm(false);
     }
 
     /// <summary>
