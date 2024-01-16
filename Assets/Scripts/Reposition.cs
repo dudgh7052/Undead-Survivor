@@ -22,18 +22,17 @@ public class Reposition : MonoBehaviour
         Vector3 _playerPos = GameManager.Instance.Player.transform.position;
         Vector3 _myPos = transform.position;
 
-        // X, Y 멀어진 거리 구하기
-        float _diffX = MathF.Abs(_playerPos.x - _myPos.x);
-        float _diffY = MathF.Abs(_playerPos.y - _myPos.y);
-
-        // 플레이어 입력에 따른 타일배치
-        Vector3 _playerDir = GameManager.Instance.Player.m_inputVec;
-        float _dirX = _playerDir.x < 0 ? -1 : 1;
-        float _dirY = _playerDir.y < 0 ? -1 : 1;
-
         switch (transform.tag)
         {
             case "Ground":
+                // X, Y 멀어진 거리 구하기
+                float _diffX = _playerPos.x - _myPos.x;
+                float _diffY = _playerPos.y - _myPos.y;
+                float _dirX = _diffX < 0 ? -1 : 1;
+                float _dirY = _diffY < 0 ? -1 : 1;
+                _diffX = Mathf.Abs(_diffX);
+                _diffY = Mathf.Abs(_diffY);
+
                 if (_diffX > _diffY)
                 {
                     transform.Translate(Vector3.right * _dirX * 40); // 타일맵 크기가 20이기에 20 + 20 => 40
@@ -46,7 +45,9 @@ public class Reposition : MonoBehaviour
             case "Enemy":
                 if (m_coll.enabled)
                 {
-                    transform.Translate(_playerDir * 20 + new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(-3.0f, 3.0f), 0.0f));
+                    Vector3 _dist = _playerPos - _myPos;
+                    Vector3 _ran = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+                    transform.Translate(_dist * 2 + _ran );
                 }
                 break;
         }

@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 레벨별 최대경험치 배열
     /// </summary>
-    public int[] m_nextExp = { 10, 30, 60, 100, 150, 210, 280, 360, 450, 600 };
+    public int[] m_nextExp = new int[10];
 
     [Header("# Game Object")]
     /// <summary>

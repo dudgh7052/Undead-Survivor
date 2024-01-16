@@ -146,7 +146,7 @@ public class Weapon : MonoBehaviour
             Vector3 _rotVec = Vector3.forward * 360 * i / m_count;
             _bullet.Rotate(_rotVec);
             _bullet.Translate(_bullet.up * 1.5f, Space.World);
-            _bullet.GetComponent<Bullet>().Init(m_damage, -1, Vector3.zero); // -1 is Infinity Per.
+            _bullet.GetComponent<Bullet>().Init(m_damage, -100, Vector3.zero); // -100 is Infinity Per.
         }
     }
 

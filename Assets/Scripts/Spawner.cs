@@ -22,9 +22,12 @@ public class Spawner : MonoBehaviour
     /// </summary>
     [SerializeField] float m_timer;
 
+    [SerializeField] float m_levelTime;
+
     void Awake()
     {
-        m_spawnPoints = GetComponentsInChildren<Transform>();
+        m_spawnPoints = GetComponentsInChildren<Transform>(); // 스폰 포인트 가져오기
+        m_levelTime = GameManager.Instance.m_maxGameTime / m_spawnData.Length;
     }
 
     void Update()
@@ -33,7 +36,8 @@ public class Spawner : MonoBehaviour
 
         m_timer += Time.deltaTime;
         // Mathf.FloorToInt()로 소수점 아래 버리기 반대는 CeilToInt()
-        m_level = Mathf.Min(Mathf.FloorToInt(GameManager.Instance.m_gameTime / 10.0f), m_spawnData.Length - 1);
+        // 게임 시간에 따라 스폰 레벨 변화
+        m_level = Mathf.Min(Mathf.FloorToInt(GameManager.Instance.m_gameTime / m_levelTime), m_spawnData.Length - 1);
 
         if (m_timer > m_spawnData[m_level].m_spawnTime)
         {
