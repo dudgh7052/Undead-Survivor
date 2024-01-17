@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
     public Result m_uiResult;
 
     /// <summary>
+    /// 조이스틱 UI
+    /// </summary>
+    public Transform m_uiJoy;
+
+    /// <summary>
     /// 에너미 클리너
     /// </summary>
     public GameObject m_enemyCleaner = null;
@@ -86,6 +91,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         g_instance = this;
+        Application.targetFrameRate = 60; // 어플리케이션 실행 시 타겟 프레임을 60으로 지정 - 안 할 시 30으로 지정됨
     }
 
     void Update()
@@ -171,6 +177,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    /// <summary>
+    /// 게임 종료
+    /// </summary>
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
+
     public void GetExp()
     {
         if (!m_isLive) return;
@@ -190,11 +204,13 @@ public class GameManager : MonoBehaviour
     {
         m_isLive = false;
         Time.timeScale = 0;
+        m_uiJoy.localScale = Vector3.zero;
     }
 
     public void Resume()
     {
         m_isLive = true;
         Time.timeScale = 1;
+        m_uiJoy.localScale = Vector3.one;
     }
 }
